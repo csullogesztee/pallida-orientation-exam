@@ -1,5 +1,4 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using CarApplication.Repositories;
 
@@ -26,19 +25,38 @@ namespace CarApplication.Controllers
         public IActionResult ListCars(string plate)
         {
             var carList = CarRepository.SelectCarsByPlate(plate);
-            if (carList.Count() == 0)
+            if (ModelState.IsValid)
             {
-                string message = "Sorry, the submitted licence plate is not valid";
-                return RedirectToAction("LicensePlateForm", message);
+                if (carList.Count() == 0)
+                {
+                    string message = "Sorry, the submitted licence plate is not valid";
+                    return RedirectToAction("LicensePlateForm", message);
+                }
+                else
+                {
+                    return RedirectToAction("LicensePlateForm", carList);
+                }
             }
-            return RedirectToAction("LicensePlateForm", carList);
+            else
+            {
+                return RedirectToAction("LicensePlateForm", carList);
+            }    
         }
 
         [HttpGet]
         [Route("/search")]
         public IActionResult ListFilteredCars([FromQuery] string filter)
         {
-            return View();
+            var carList = CarRepository.SelectCarsByFilter(filter);
+            return View("LicensePlateForm", carList);
+        }
+
+        [HttpGet]
+        [Route("/search")]
+        public IActionResult ListFilteredCarsByBrand([FromQuery] string filter)
+        {
+            var carList = CarRepository.SelectCarsByBrand(filter);
+            return View("LicensePlateForm", carList);
         }
     }
 }
