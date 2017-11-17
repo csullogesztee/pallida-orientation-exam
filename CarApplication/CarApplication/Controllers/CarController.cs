@@ -7,6 +7,7 @@ using CarApplication.Repositories;
 
 namespace CarApplication.Controllers
 {
+    [Route("")]
     public class CarController : Controller
     {
         CarRepository CarRepository;
@@ -16,7 +17,8 @@ namespace CarApplication.Controllers
             CarRepository = carRepository;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult LicensePlateForm()
         {
             return View();
         }

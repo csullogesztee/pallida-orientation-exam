@@ -1,0 +1,14 @@
+﻿@model CarApplication.Models.Car
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Licence plate form</title>
+    </head>
+    <body>
+        @using (Html.BeginForm())
+        {
+            <text>@Html.LabelFor(model => model.Plate): @Html.TextBoxFor(model => model.Plate)</text><br />
+
+            <button type="submit" value="Submit">Search</button>
+        }
+    </body>
+</html>
