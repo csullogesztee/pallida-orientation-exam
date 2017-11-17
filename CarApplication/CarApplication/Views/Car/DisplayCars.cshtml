@@ -1,0 +1,31 @@
+﻿@model List<CarApplication.Models.Car>
+@{
+    Layout = "LicensePlateForm";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Display cars</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>Licence plate</td>
+                <td>Brand</td>
+                <td>Model</td>
+                <td>Color</td>
+                <td>Year</td>
+                <td>
+            </tr>
+            @foreach (var car in Model)
+            {
+                <tr>
+                    <td>@car.Plate</td>
+                    <td>@car.CarBrand</td>
+                    <td>@car.CarModel</td>
+                    <td>@car.Color</td>
+                    <td>@car.Year</td>
+                </tr>
+            }
+        </table>
+    </body>
+</html>

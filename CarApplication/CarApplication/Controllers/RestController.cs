@@ -21,7 +21,7 @@ namespace CarApplication.Controllers
         [Route("/search/{brand}")]
         public IActionResult ListCarsInSameBrand([FromQuery] string brand)
         {
-            var selectedCars = CarRepository.SelectCarByBrand(brand);
+            var selectedCars = CarRepository.SelectCarsByBrand(brand);
             return Json(new { result = "ok", data = selectedCars });
         }
     }

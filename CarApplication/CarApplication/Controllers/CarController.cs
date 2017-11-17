@@ -15,7 +15,7 @@ namespace CarApplication.Controllers
         }
 
         [HttpGet]
-        public IActionResult LicensePlateForm()
+        public IActionResult DisplayCars()
         {
             return View();
         }
@@ -30,16 +30,16 @@ namespace CarApplication.Controllers
                 if (carList.Count() == 0)
                 {
                     string message = "Sorry, the submitted licence plate is not valid";
-                    return RedirectToAction("LicensePlateForm", message);
+                    return RedirectToAction("DisplayCars", message);
                 }
                 else
                 {
-                    return RedirectToAction("LicensePlateForm", carList);
+                    return RedirectToAction("DisplayCars", carList);
                 }
             }
             else
             {
-                return RedirectToAction("LicensePlateForm", carList);
+                return RedirectToAction("DisplayCars", carList);
             }    
         }
 
@@ -48,7 +48,7 @@ namespace CarApplication.Controllers
         public IActionResult ListFilteredCars([FromQuery] string filter)
         {
             var carList = CarRepository.SelectCarsByFilter(filter);
-            return View("LicensePlateForm", carList);
+            return View("DisplayCars", carList);
         }
 
         [HttpGet]
@@ -56,7 +56,7 @@ namespace CarApplication.Controllers
         public IActionResult ListFilteredCarsByBrand([FromQuery] string filter)
         {
             var carList = CarRepository.SelectCarsByBrand(filter);
-            return View("LicensePlateForm", carList);
+            return View("DisplayCars", carList);
         }
     }
 }
