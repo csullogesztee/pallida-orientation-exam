@@ -22,5 +22,12 @@ namespace CarApplication.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult ListCars(string plate)
+        {
+            var carList = CarRepository.SelectCarByPlate(plate);
+            return RedirectToAction("LicensePlateForm", carList);
+        }
     }
 }

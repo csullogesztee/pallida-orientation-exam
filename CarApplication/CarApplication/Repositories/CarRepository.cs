@@ -1,4 +1,5 @@
 ﻿using CarApplication.Entities;
+using CarApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,14 @@ namespace CarApplication.Repositories
         public CarRepository(CarContext carcontext)
         {
             CarContext = carcontext;
+        }
+
+        public List<Car> SelectCarByPlate(string licensePlate)
+        {
+            var selectedCars = (from car in CarContext.Cars
+                                where car.Plate.Contains(licensePlate)
+                                select car).ToList();
+            return selectedCars;
         }
     }
 }
