@@ -17,12 +17,12 @@ namespace CarApplication.Controllers
         [HttpGet]
         public IActionResult DisplayCars()
         {
-            return View();
+            return PartialView("LicensePlateForm");
         }
 
         [HttpPost]
         [Route("/search")]
-        public IActionResult ListCars(string plate)
+        public IActionResult DisplayCars(string plate)
         {
             var carList = CarRepository.SelectCarsByPlate(plate);
             if (ModelState.IsValid)
@@ -34,12 +34,12 @@ namespace CarApplication.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("DisplayCars", carList);
+                    return View("DisplayCars", carList);
                 }
             }
             else
             {
-                return RedirectToAction("DisplayCars", carList);
+                return View("DisplayCars", carList);
             }    
         }
 
@@ -52,7 +52,7 @@ namespace CarApplication.Controllers
         }
 
         [HttpGet]
-        [Route("/search")]
+        [Route("/search/{brand}")]
         public IActionResult ListFilteredCarsByBrand([FromQuery] string filter)
         {
             var carList = CarRepository.SelectCarsByBrand(filter);
