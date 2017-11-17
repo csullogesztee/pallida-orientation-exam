@@ -1,4 +1,4 @@
-﻿@model List<CarApplication.Models.Car>
+﻿@model CarApplication.Models.Car
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Licence plate form</title>
@@ -6,7 +6,7 @@
     <body>
         @using (Html.BeginForm())
         {
-            <text>@Html.LabelFor(model => model.Plate): @Html.TextBoxFor(model => model.Plate)</text><a href="/police/RB" title="RB" class="RB">Police cars only</a>
+            <text>@Html.LabelFor(model => model.Plate): @Html.TextBoxFor(model => model.Plate)@Html.ValidationMessageFor(model => model.Plate)</text><a href="/police/RB" title="RB" class="RB">Police cars only</a>
             <a href="/diplomat/DT" title="DT" class="DT">Diplomats only</a><br />
 
             <button type="submit" value="Search">Search</button>

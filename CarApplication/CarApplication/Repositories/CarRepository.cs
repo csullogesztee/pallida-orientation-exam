@@ -1,9 +1,7 @@
 ﻿using CarApplication.Entities;
 using CarApplication.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CarApplication.Repositories
 {
@@ -16,12 +14,41 @@ namespace CarApplication.Repositories
             CarContext = carcontext;
         }
 
-        public List<Car> SelectCarByPlate(string licensePlate)
+        public List<Car> SelectCarsByPlate(string licensePlate)
         {
             var selectedCars = (from car in CarContext.Cars
                                 where car.Plate.Contains(licensePlate)
                                 select car).ToList();
             return selectedCars;
+        }
+
+        public List<Car> SelectCarsByBrand(string brand)
+        {
+            var selectedCars = (from car in CarContext.Cars
+                                where car.CarBrand == brand
+                                select car).ToList();
+            return selectedCars;
+        }
+
+        public List<Car> SelectCarsByFilter(string filter)
+        {
+            var selectedCarsList = new List<Car>();
+
+            if (filter == "police")
+            {
+                var selectedCars = (from car in CarContext.Cars
+                                    where car.Plate.Contains("RB")
+                                    select car).ToList();
+                selectedCarsList = selectedCars;
+            }
+            else if (filter == "diplomat")
+            {
+                var selectedCars = (from car in CarContext.Cars
+                                   where car.Plate.Contains("DT")
+                                   select car).ToList();
+                selectedCarsList = selectedCars;
+            }
+            return selectedCarsList;
         }
     }
 }
